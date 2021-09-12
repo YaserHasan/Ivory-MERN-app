@@ -1,5 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { breakPoints } from './constants/responsive_breakPoints';
+
+
 const GlobalStyles = createGlobalStyle`
 
     /*
@@ -98,6 +101,11 @@ const GlobalStyles = createGlobalStyle`
         font-weight: 300;
     }
 
+    ::placeholder {
+        color: #808080;
+        opacity: 1;
+    }
+
     /* === anchor === */
     a {
         text-decoration: none;
@@ -123,6 +131,134 @@ const GlobalStyles = createGlobalStyle`
         }
         100% {
             opacity: 1;
+        }
+    }
+
+    /*
+    ====================================
+        Responsive
+    ====================================
+    */
+    @media ${breakPoints.smallScreensAndLaptops} {
+        /* === Headers === */
+        h1 {
+            font-size: 3.4rem;
+        }
+
+        h2 {
+            font-size: 2.6rem;
+        }
+
+        h3 {
+            font-size: 2.2rem;
+        }
+
+        h4 {
+            font-size: 1.8rem;
+        }
+
+        h5 {
+            font-size: 1.6rem;
+        }
+
+        /* === Paragraph === */
+        p {
+            font-size: 1.6rem;
+        }
+
+        .p-xlarge {
+            font-size: 2.2rem;
+        }
+
+        .p-large {
+            font-size: 2.0rem;
+        }
+
+        /* === label === */
+        label {
+            font-size: 2.0rem;
+        }
+    }
+
+    @media ${breakPoints.iPadsAndTablets} {
+        /* === Headers === */
+        h1 {
+            font-size: 3.2rem;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+        }
+
+        h3 {
+            font-size: 2.0rem;
+        }
+
+        h4 {
+            font-size: 1.6rem;
+        }
+
+        h5 {
+            font-size: 1.4rem;
+        }
+
+        /* === Paragraph === */
+        p {
+            font-size: 1.4rem;
+        }
+
+        .p-xlarge {
+            font-size: 2.0rem;
+        }
+
+        .p-large {
+            font-size: 1.8rem;
+        }
+
+        /* === label === */
+        label {
+            font-size: 1.8rem;
+        }
+    }
+
+    @media ${breakPoints.mobileDevices} {
+        /* === Headers === */
+        h1 {
+            font-size: 3.2rem;
+        }
+
+        h2 {
+            font-size: 2.4rem;
+        }
+
+        h3 {
+            font-size: 2.0rem;
+        }
+
+        h4 {
+            font-size: 1.6rem;
+        }
+
+        h5 {
+            font-size: 1.4rem;
+        }
+
+        /* === Paragraph === */
+        p {
+            font-size: 1.4rem;
+        }
+
+        .p-xlarge {
+            font-size: 2.0rem;
+        }
+
+        .p-large {
+            font-size: 1.8rem;
+        }
+
+        /* === label === */
+        label {
+            font-size: 1.8rem;
         }
     }
 `;

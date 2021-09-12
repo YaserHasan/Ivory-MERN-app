@@ -36,7 +36,7 @@ function Header() {
         <Styles.Root>
             <Styles.TopHead>
                 <ul>
-                    {infoLinks.map((link, i) => <li><Link to={link.path} key={i}>{link.name}</Link></li>)}
+                    {infoLinks.map((link, i) => <li key={i}><Link to={link.path}><h5>{link.name}</h5></Link></li>)}
                 </ul>
             </Styles.TopHead>
 
@@ -48,17 +48,18 @@ function Header() {
                 <SearchInput />
 
                 <Styles.Nav>
-                    <Styles.NavLink className="clickable" to="/"><i class="fas fa-shopping-cart"></i></Styles.NavLink>
+                    <Styles.NavLink className="clickable" to="/"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
                     <Styles.DropDownLink>
-                        <Styles.NavLink className="clickable" to="/"><i class="fas fa-user"></i></Styles.NavLink>
+                        <Styles.NavLink className="clickable" to="/"><i className="fas fa-user"></i></Styles.NavLink>
                         <Styles.DropDownItems>
-                            {buildAccountLinks().map((link, i) => <li><Link to={link.path} key={i}>{link.name}</Link></li>)}
+                            {buildAccountLinks().map((link, i) => <li key={i}><Link to={link.path}>{link.name}</Link></li>)}
                         </Styles.DropDownItems>
                     </Styles.DropDownLink>
                 </Styles.Nav>
 
-                <Styles.NavLink menuBtn className="clickable" to="/" onClick={toggleMobileMenu}>
-                    <i class={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+                {/* Added '$' prefix on the prop name to avoid React Unknown Prop Warning */}
+                <Styles.NavLink $menuBtn className="clickable" to="/" onClick={toggleMobileMenu}>
+                    <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
                 </Styles.NavLink>
             </Styles.MainHead>
 
@@ -69,7 +70,7 @@ function Header() {
                     <SearchInput mobile />
                 </Styles.MobileSearchWrapper>
                 {buildAccountLinks().concat(infoLinks).map(
-                    (link, i) => <li><Link to={link.path} key={i}>{link.name}</Link></li>
+                    (link, i) => <li key={i}><Link to={link.path}>{link.name}</Link></li>
                 )}
             </Styles.MobileNav>
         </Styles.Root>

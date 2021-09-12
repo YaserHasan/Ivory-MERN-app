@@ -9,7 +9,7 @@ function SearchInput(props) {
         <Styles.Root {...props}>
             <Input type="text" placeholder="Search"/>
             <Styles.Icon className="clickable">
-                <i class="fas fa-search"></i>
+                <i className="fas fa-search"></i>
             </Styles.Icon>
         </Styles.Root>
     );

@@ -107,7 +107,7 @@ export const NavLink = styled(Link)`
     }
 
     // hide the hamburger menu button if the size bigger than tablet and iPad size
-    ${props => props.menuBtn && `
+    ${props => props.$menuBtn && `
         @media (min-width: calc(${devices.iPadsAndTablets} + 1px)) {
             & {
                 display: none;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { breakPoints } from '../../constants/responsive_breakPoints';
+
 
 const Input = styled.input`
     font-size: 2.2rem;
@@ -10,9 +12,17 @@ const Input = styled.input`
     background-color: #F3F3F4;
     border-radius: 10px;
 
-    & ::placeholder {
-        color: #808080;
-        opacity: 1;
+    // responsive
+    @media ${breakPoints.smallScreensAndLaptops} {
+        & {
+            font-size: 2.0rem;
+        }
+    }
+
+    @media ${breakPoints.mobileDevices} {
+        & {
+            font-size: 1.8rem;
+        }
     }
 `;
 
