@@ -12,6 +12,6 @@ router.delete('/logout', checkAuth, AuthController.logout);
 
 router.post('/refreshToken', AuthController.refreshToken);
 
-router.get('/checkAuth', checkAuth, AuthController.checkAuth);
+router.get('/getUserData', checkAuth, AuthController.getUserData);
 
 module.exports = router;

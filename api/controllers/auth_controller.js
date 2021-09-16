@@ -6,6 +6,15 @@ const validationUtils = require('../utils/validation_utils');
 const User = require('../models/user_model');
 const RefreshToken = require('../models/refresh_token_model');
 
+
+// cookie settings
+var farFuture = ((24 * 60 * 60) * 365) * 10 // ~10y
+const cookieSettings = {
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: farFuture,
+};
+
 function checkBodyProperies(requestBody, isLogin = false) {
     const emailRegex = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     const nameRegex = /([a-zA-Z]{2,} )([a-zA-Z]{2,})/;
@@ -96,12 +105,20 @@ exports.login = async (req, res) => {
         const result = await bcrypt.compare(req.body.password, user.password);
         if (result) {
             const accessToken = generateToken(user);
+            const formattedUserData = {_id: user._id, name: user.name, email: user.email};
             const refreshToken = jwt.sign(
-                {_id: user._id, name: user.name, email: user.email},
+                formattedUserData,
                 process.env.JWT_REFRESH_SECRET,
             );
             await addRefreshToken(user._id, refreshToken);
-            res.status(200).json({message: "user logged in successfully", accessToken, refreshToken});
+            res.cookie('accessToken', accessToken, cookieSettings);
+            res.cookie('refreshToken', refreshToken, cookieSettings);
+            res.status(200).json({
+                message: "user logged in successfully",
+                user: formattedUserData,
+                accessToken,
+                refreshToken,
+            });
         }
         else {
             res.status(401).json({message: "The password is incorrect"});
@@ -116,6 +133,8 @@ exports.login = async (req, res) => {
 exports.logout = async (req, res) => {
     try {
         await RefreshToken.deleteMany({userID: req.userData._id}).exec();
+        res.clearCookie('accessToken');
+        res.clearCookie('refreshToken');
         res.status(200).json({message: "logged out successfully"});
     } catch(e) {
         console.log(e);
@@ -125,7 +144,7 @@ exports.logout = async (req, res) => {
 
 exports.refreshToken = async (req, res) => {
     try {
-        const refreshToken = req.body.refreshToken;
+        const refreshToken = req.cookies.refreshToken;
         if (validationUtils.validateString(refreshToken, 'refreshToken'))
             return res.status(400).json({message: validationUtils.validateString(refreshToken, 'refreshToken')});
         
@@ -136,6 +155,7 @@ exports.refreshToken = async (req, res) => {
                 res.status(401).json({message: "invalid refreshToken"});
             else {
                 const accessToken = generateToken(userData);
+                res.cookie('accessToken', accessToken, cookieSettings);
                 res.status(200).json({accessToken: accessToken});
             }
         });
@@ -149,6 +169,7 @@ exports.refreshToken = async (req, res) => {
     }
 }
 
-exports.checkAuth = (req, res) => {
-    return res.status(204).send();
+exports.getUserData = (req, res) => {
+    const formattedUserData = {_id: req.userData._id, name: req.userData.name, email: req.userData.email};
+    res.status(200).json({user: formattedUserData});
 }

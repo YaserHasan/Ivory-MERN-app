@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { breakPoints } from '../../constants/responsive_breakPoints';
+import { BREAKPOINTS } from '../../constants/responsive_breakPoints';
 
 
 const VerticalProductViewGrid = styled.div`
@@ -9,19 +9,19 @@ const VerticalProductViewGrid = styled.div`
     gap: 25px 25px;
 
     // responsive
-    @media ${breakPoints.smallScreensAndLaptops} {
+    @media ${BREAKPOINTS.smallScreensAndLaptops} {
         & {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         & {
             grid-template-columns: repeat(2, 1fr);
         }
     }
 
-    @media ${breakPoints.mobileDevices} {
+    @media ${BREAKPOINTS.mobileDevices} {
         & {
             grid-template-columns: repeat(1, 1fr);
         }

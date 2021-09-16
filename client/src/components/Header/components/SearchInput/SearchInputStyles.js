@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { breakPoints } from '../../../../constants/responsive_breakPoints';
+import { BREAKPOINTS } from '../../../../constants/responsive_breakPoints';
 
 export const Root = styled.div`
     ${props => !props.mobile && 'margin: 0 2rem;'}
@@ -10,7 +10,7 @@ export const Root = styled.div`
     width: 100%;
 
     ${props => !props.mobile && `
-        @media ${breakPoints.iPadsAndTablets} {
+        @media ${BREAKPOINTS.iPadsAndTablets} {
             & {
                 display: none;
             }

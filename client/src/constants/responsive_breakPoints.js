@@ -1,4 +1,4 @@
-export const devices = {
+export const DEVICES = {
     mobileDevices: '480px',
     iPadsAndTablets: '768px',
     smallScreensAndLaptops: '1024px',
@@ -6,7 +6,7 @@ export const devices = {
     extraLargeScreens: '1201px',
 }
 
-export const breakPoints = {
+export const BREAKPOINTS = {
     mobileDevices: '(max-width: 480px)',
     iPadsAndTablets: '(max-width: 768px)',
     smallScreensAndLaptops: '(max-width: 1024px)',

@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { breakPoints } from './constants/responsive_breakPoints';
+import { BREAKPOINTS } from './constants/responsive_breakPoints';
 
 
 const GlobalStyles = createGlobalStyle`
@@ -139,7 +139,7 @@ const GlobalStyles = createGlobalStyle`
         Responsive
     ====================================
     */
-    @media ${breakPoints.smallScreensAndLaptops} {
+    @media ${BREAKPOINTS.smallScreensAndLaptops} {
         /* === Headers === */
         h1 {
             font-size: 3.4rem;
@@ -180,7 +180,7 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         /* === Headers === */
         h1 {
             font-size: 3.2rem;
@@ -221,7 +221,7 @@ const GlobalStyles = createGlobalStyle`
         }
     }
 
-    @media ${breakPoints.mobileDevices} {
+    @media ${BREAKPOINTS.mobileDevices} {
         /* === Headers === */
         h1 {
             font-size: 3.2rem;

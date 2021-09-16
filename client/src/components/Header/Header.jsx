@@ -1,34 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/auth/authActions';
 import * as Styles from './HeaderStyles';
 import Divider from '../Divider';
 import SearchInput from './components/SearchInput';
+import Loading from '../Loading';
 
 
 function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { user, logoutLoading } = useSelector(state => state.auth);
+    const dispatch = useDispatch();
 
     function toggleMobileMenu() {
         setMobileMenuOpen(prev => !prev);
     }
 
-    const infoLinks = [
-        {name: 'about Ivory', path: '/'},
-        {name: 'contact us', path: '/'},
-    ];
+    function buildInfoLinks(forMobile) {
+        const links = [
+            { name: 'about Ivory', path: '/' },
+            { name: 'contact us', path: '/' },
+        ];
+        if (forMobile) 
+            return links.map(link => (
+                <li><Link to={link.path}>{link.name}</Link></li>
+            ));
+        
+        return links.map(link => (
+            <li><Link to={link.path}><h5>{link.name}</h5></Link></li>
+        ));
+    }
 
     function buildAccountLinks() {
-        // Placeholder for auth check
-        if (false)
+        if (user)
             return [
-                {name: 'My Orders', path: '/'},
-                {name: 'Logout', path: '/'},
+                <li><Link to='/'>My Orders</Link></li>,
+                <li><Link to='/' onClick={() => dispatch(logout())}>Logout</Link></li>,
             ];
 
         return [
-            {name: 'Login', path: '/'},
-            {name: 'Register', path: '/'},
+            <li><Link to='/login'>Login</Link></li>,
+            <li><Link to='/register'>Register</Link></li>,
         ]
     }
 
@@ -36,7 +50,7 @@ function Header() {
         <Styles.Root>
             <Styles.TopHead>
                 <ul>
-                    {infoLinks.map((link, i) => <li key={i}><Link to={link.path}><h5>{link.name}</h5></Link></li>)}
+                    {buildInfoLinks()}
                 </ul>
             </Styles.TopHead>
 
@@ -48,13 +62,14 @@ function Header() {
                 <SearchInput />
 
                 <Styles.Nav>
-                    <Styles.NavLink className="clickable" to="/"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
-                    <Styles.DropDownLink>
+                    <Styles.NavLink className="clickable" to="/protect"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
+                    {logoutLoading && <Loading small />}
+                    {!logoutLoading && <Styles.DropDownLink>
                         <Styles.NavLink className="clickable" to="/"><i className="fas fa-user"></i></Styles.NavLink>
                         <Styles.DropDownItems>
-                            {buildAccountLinks().map((link, i) => <li key={i}><Link to={link.path}>{link.name}</Link></li>)}
+                            {buildAccountLinks()}
                         </Styles.DropDownItems>
-                    </Styles.DropDownLink>
+                    </Styles.DropDownLink>}
                 </Styles.Nav>
 
                 {/* Added '$' prefix on the prop name to avoid React Unknown Prop Warning */}
@@ -69,9 +84,7 @@ function Header() {
                 <Styles.MobileSearchWrapper>
                     <SearchInput mobile />
                 </Styles.MobileSearchWrapper>
-                {buildAccountLinks().concat(infoLinks).map(
-                    (link, i) => <li key={i}><Link to={link.path}>{link.name}</Link></li>
-                )}
+                {buildAccountLinks().concat(buildInfoLinks(true))}
             </Styles.MobileNav>
         </Styles.Root>
     );

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { breakPoints } from '../../../../constants/responsive_breakPoints';
+import { BREAKPOINTS } from '../../../../constants/responsive_breakPoints';
 
 
 export const Root = styled.div`
@@ -66,7 +66,7 @@ export const CartRemoveBtn = styled(BaseActionBtn)`
     }
 
     // responsive
-    @media ${breakPoints.mobileDevices} {
+    @media ${BREAKPOINTS.mobileDevices} {
         & {
             width: 40px;
             height: 40px;

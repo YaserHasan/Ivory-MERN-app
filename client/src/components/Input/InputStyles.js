@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
-import { breakPoints } from '../../constants/responsive_breakPoints';
+import { BREAKPOINTS } from '../../constants/responsive_breakPoints';
 
 
-const Input = styled.input`
+export const Label = styled.label`
+    display: block;
+    margin-bottom: 1rem;
+`;
+
+export const Input = styled.input`
+    width: 100%;
     font-size: 2.2rem;
     font-weight: 400;
     padding: 1rem;
@@ -13,17 +19,15 @@ const Input = styled.input`
     border-radius: 10px;
 
     // responsive
-    @media ${breakPoints.smallScreensAndLaptops} {
+    @media ${BREAKPOINTS.smallScreensAndLaptops} {
         & {
             font-size: 2.0rem;
         }
     }
 
-    @media ${breakPoints.mobileDevices} {
+    @media ${BREAKPOINTS.mobileDevices} {
         & {
             font-size: 1.8rem;
         }
     }
 `;
-
-export default Input;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { breakPoints } from '../../constants/responsive_breakPoints';
+import { BREAKPOINTS } from '../../constants/responsive_breakPoints';
 
 
 const Button = styled.button`
@@ -22,7 +22,7 @@ const Button = styled.button`
     }
 
     // responsive
-    @media ${breakPoints.smallScreensAndLaptops} {
+    @media ${BREAKPOINTS.smallScreensAndLaptops} {
         & {
             font-size: 2.4rem;
         }
@@ -34,7 +34,7 @@ const Button = styled.button`
         `}
     }
 
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         & {
             font-size: 2.2rem;
         }

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from 'react-router-dom';
 import Container from '../Container';
 import Divider from '../Divider';
-import { breakPoints, devices } from '../../constants/responsive_breakPoints';
+import { BREAKPOINTS, DEVICES } from '../../constants/responsive_breakPoints';
 
 
 export const Root = styled.header`
@@ -41,7 +41,7 @@ export const TopHead = styled(Container)`
     }
 
     // responsive
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         &, & + ${Divider} {
             display: none;
         }
@@ -66,7 +66,7 @@ export const MainHead = styled(Container)`
     }
 
     // responsive
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         & {
             height: 60px;
         }
@@ -84,7 +84,7 @@ export const Nav = styled.nav`
     align-items: center;
 
     // responsive
-    @media ${breakPoints.iPadsAndTablets} {
+    @media ${BREAKPOINTS.iPadsAndTablets} {
         & {
             display: none;
         }
@@ -108,7 +108,7 @@ export const NavLink = styled(Link)`
 
     // hide the hamburger menu button if the size bigger than tablet and iPad size
     ${props => props.$menuBtn && `
-        @media (min-width: calc(${devices.iPadsAndTablets} + 1px)) {
+        @media (min-width: calc(${DEVICES.iPadsAndTablets} + 1px)) {
             & {
                 display: none;
             }
