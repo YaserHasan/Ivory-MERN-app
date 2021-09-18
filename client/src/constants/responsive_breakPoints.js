@@ -1,15 +1,23 @@
+export const DEVICE_SIZES = {
+    mobileDevices: 480,
+    iPadsAndTablets: 768,
+    smallScreensAndLaptops: 1024,
+    desktopsAndLargeScreens: 1200,
+    extraLargeScreens: 1201,
+}
+
 export const DEVICES = {
-    mobileDevices: '480px',
-    iPadsAndTablets: '768px',
-    smallScreensAndLaptops: '1024px',
-    desktopsAndLargeScreens: '1200px',
-    extraLargeScreens: '1201px',
+    mobileDevices: `${DEVICE_SIZES.mobileDevices}px`,
+    iPadsAndTablets: `${DEVICE_SIZES.iPadsAndTablets}px`,
+    smallScreensAndLaptops: `${DEVICE_SIZES.smallScreensAndLaptops}px`,
+    desktopsAndLargeScreens: `${DEVICE_SIZES.desktopsAndLargeScreens}px`,
+    extraLargeScreens: `${DEVICE_SIZES.extraLargeScreens}px`,
 }
 
 export const BREAKPOINTS = {
-    mobileDevices: '(max-width: 480px)',
-    iPadsAndTablets: '(max-width: 768px)',
-    smallScreensAndLaptops: '(max-width: 1024px)',
-    desktopsAndLargeScreens: '(max-width: 1200px)',
-    extraLargeScreens: '(min-width: 1201px)',
+    mobileDevices: `(max-width: ${DEVICES.mobileDevices})`,
+    iPadsAndTablets: `(max-width: ${DEVICES.iPadsAndTablets})`,
+    smallScreensAndLaptops: `(max-width: ${DEVICES.smallScreensAndLaptops})`,
+    desktopsAndLargeScreens: `(max-width: ${DEVICES.desktopsAndLargeScreens})`,
+    extraLargeScreens: `(min-width: ${DEVICES.extraLargeScreens})`,
 };

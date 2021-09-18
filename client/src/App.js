@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ProtectedRoute from "./ProtectedRoute";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer";
 import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage/HomePage";
 
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact>
-          <h1>HomePage</h1>
+          <HomePage />
         </Route>
 
         <ProtectedRoute inAuth path="/register">
@@ -23,6 +25,7 @@ function App() {
           <AuthPage formType="login"/>
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </Router>
   );
 }

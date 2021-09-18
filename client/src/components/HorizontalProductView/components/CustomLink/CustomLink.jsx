@@ -1,7 +1,12 @@
 import React from 'react';
 
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+
+const StyledLink = styled(Link)`
+    display: block;
+`;
 
 function CustomLink(props) {
     const { disabled, children } = props;
@@ -15,9 +20,9 @@ function CustomLink(props) {
      }
          
     return (
-        <Link {...props}>
+        <StyledLink {...props}>
             {children}
-        </Link>
+        </StyledLink>
     );
 }
 

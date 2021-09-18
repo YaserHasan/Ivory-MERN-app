@@ -47,7 +47,7 @@ function AuthPage({ formType }) {
 
 
     return (
-        <Styles.Root>
+        <Styles.Root expand>
             <Styles.MainCard thick lightColor>
                 <AuthNav loginSelected={loginSelected} setLoginSelected={setLoginSelected}/>
                 <Styles.Form noValidate onSubmit={onSubmit}>

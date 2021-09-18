@@ -6,13 +6,13 @@ import { formatPrice } from '../../utils/formatUtils';
 
 
 function VerticalProductView(props) {
-    const { imageURL, title, price } = props.product;
+    const { imageURL, name, price } = props.product;
 
     return (
         <Link to="/">
             <Styles.Root hoverEffect>
                 <img src={imageURL} alt="Product" />
-                <p>{title}</p>
+                <p>{name}</p>
                 <h2 dangerouslySetInnerHTML={{__html: formatPrice(price)}}></h2>
             </Styles.Root>
         </Link>

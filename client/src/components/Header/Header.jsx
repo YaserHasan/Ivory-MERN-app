@@ -47,18 +47,26 @@ function Header() {
         ));
     }
 
-    function buildAccountLinks() {
-        if (user)
-            return [
-                <li key='My Cart'><Link to='/'>My Cart</Link></li>,
+    function buildAccountLinks(forMobile) {
+        let links = [];
+
+        if (user) {
+            if (forMobile)
+                links.push(<li key='My Cart'><Link to='/'>My Cart</Link></li>);
+
+            links = links.concat([
                 <li key='My Orders'><Link to='/'>My Orders</Link></li>,
                 <li key='Logout'><Link to='/' onClick={() => dispatch(logout())}>Logout</Link></li>,
-            ];
+            ]);
+        }
 
-        return [
-            <li key='Login'><Link to='/login'>Login</Link></li>,
-            <li key='Register'><Link to='/register'>Register</Link></li>,
-        ]
+        else {
+            links = [
+                <li key='Login'><Link to='/login'>Login</Link></li>,
+                <li key='Register'><Link to='/register'>Register</Link></li>,
+            ]
+        }
+        return links;
     }
 
     return (
@@ -87,11 +95,12 @@ function Header() {
                     </Styles.DropDownLink>}
                 </Styles.Nav>
 
-                {logoutLoading && <Loading small />}
+                
                 {/* Added '$' prefix on the prop name to avoid React Unknown Prop Warning */}
-                {!logoutLoading && <Styles.NavLink $menuBtn className="clickable" to="" onClick={toggleMobileMenu}>
-                    <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
-                </Styles.NavLink>}
+                <Styles.NavLink $menuBtn className="clickable" to="" onClick={toggleMobileMenu}>
+                    {logoutLoading && <Loading small />}
+                    {!logoutLoading && <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>}
+                </Styles.NavLink>
             </Styles.MainHead>
 
             <Divider />
@@ -100,7 +109,7 @@ function Header() {
                 <Styles.MobileSearchWrapper>
                     <SearchInput mobile />
                 </Styles.MobileSearchWrapper>
-                {buildAccountLinks().concat(buildInfoLinks(true))}
+                {buildAccountLinks(true).concat(buildInfoLinks(true))}
             </Styles.MobileNav>
         </Styles.Root>
     );

@@ -25,16 +25,25 @@ const GlobalStyles = createGlobalStyle`
         --free-space-size: calc(100vh - calc(300px));
     }
 
+    #root {
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
     html {
         font-size: 62.5%;
     }
 
     body, html {
-        width: 100%;
-        height: 100%;
+        min-width: 100%;
+        min-height: 100%;
     }
 
-    * {
+    *,
+    *::before,
+    *::after {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
@@ -50,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     ul {
-    list-style: none;
+        list-style: none;
     }
 
     /* === Headers === */
