@@ -5,6 +5,7 @@ import Card from '../Card';
 
 export const Root = styled(Card)`
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: flex-start;

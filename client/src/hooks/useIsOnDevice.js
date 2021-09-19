@@ -4,10 +4,17 @@ import { DEVICE_SIZES } from '../constants/responsive_breakPoints';
 
 
 function useIsOnDevice(deviceSize) {
+    const deviceSizesList = Object.values(DEVICE_SIZES);
     const [ isOn, setIsOn ] = useState(getIsOn());
 
     function getIsOn() {
-        return getWindowSize() <= deviceSize;
+        const currentSizeIndex = deviceSizesList.findIndex(value => deviceSize === value);
+        if (currentSizeIndex === 0) {
+            return getWindowSize() <= deviceSize;
+        }
+        const outOfPreviousSizeRange = getWindowSize() > deviceSizesList[currentSizeIndex - 1];
+        const inCurrentSizeRange = getWindowSize() <= deviceSize;
+        return (outOfPreviousSizeRange && inCurrentSizeRange);
     }
 
     function getWindowSize() {
