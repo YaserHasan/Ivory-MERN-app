@@ -6,7 +6,7 @@ import * as Styles from './CategoryViewStyles';
 
 function CategoryView({category}) {
     return (
-        <Link to="/">
+        <Link to={`/category/${category.id}`}>
             <Styles.Root>
                     <img src={category.imageURL} alt="category"/>
                     <h3>{category.name}</h3>

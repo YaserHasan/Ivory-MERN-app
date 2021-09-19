@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/authActions';
 import * as Styles from './HeaderStyles';
+import Logo from '../../assets/images/logo.png';
 import Divider from '../Divider';
 import SearchInput from './components/SearchInput';
 import Loading from '../Loading';
@@ -69,6 +70,10 @@ function Header() {
         return links;
     }
 
+    function preventNavigation(e) {
+        e.preventDefault();
+    }
+
     return (
         <Styles.Root>
             <Styles.TopHead>
@@ -80,7 +85,7 @@ function Header() {
             <Divider />
 
             <Styles.MainHead>
-                <Link to="/"><img src="/assets/images/logo.png" alt="logo"/></Link>
+                <Link to="/"><img src={Logo} alt="logo"/></Link>
 
                 <SearchInput />
 
@@ -88,7 +93,7 @@ function Header() {
                     <Styles.NavLink className="clickable" to="/protect"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
                     {logoutLoading && <Loading small />}
                     {!logoutLoading && <Styles.DropDownLink>
-                        <Styles.NavLink className="clickable" to="/"><i className="fas fa-user"></i></Styles.NavLink>
+                        <Styles.NavLink className="clickable" onClick={preventNavigation}><i className="fas fa-user"></i></Styles.NavLink>
                         <Styles.DropDownItems>
                             {buildAccountLinks()}
                         </Styles.DropDownItems>

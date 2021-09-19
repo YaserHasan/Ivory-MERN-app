@@ -8,6 +8,13 @@ import { BREAKPOINTS, DEVICES } from '../../constants/responsive_breakPoints';
 
 export const Root = styled.header`
     margin-bottom: 4rem;
+
+    // responsive
+    @media ${BREAKPOINTS.iPadsAndTablets} {
+        & {
+            margin-bottom: 2rem;
+        }
+    }
 `;
 
 export const TopHead = styled(Container)`

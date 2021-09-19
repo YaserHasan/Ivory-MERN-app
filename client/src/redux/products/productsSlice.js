@@ -12,7 +12,7 @@ const initialState = {
     loading: false,
     error: null,
     categories: null,
-    categoryProducts: null,
+    selectedCategory: null,
     selectedProduct: null,
     featuredProducts: null,
     mostPopularProducts: null,
@@ -21,6 +21,18 @@ const initialState = {
 const productsSlice = createSlice({
     name: 'products',
     initialState: initialState,
+    reducers: {
+        clearSelectedCategory: (state) => {
+            state.loading = false;
+            state.error = null;
+            state.selectedCategory = null;
+        },
+        clearSelectedProduct: (state) => {
+            state.loading = false;
+            state.error = null;
+            state.selectedProduct = null;
+        },
+    },
     extraReducers: {
         [getCategories.pending]: (state) => {
             state.loading = true;
@@ -41,17 +53,17 @@ const productsSlice = createSlice({
         [getCategoryProducts.pending]: (state) => {
             state.loading = true;
             state.error = null;
-            state.categoryProducts = null;
+            state.selectedCategory = null;
         },
         [getCategoryProducts.fulfilled]: (state, action) => {
             state.loading = false;
             state.error = null;
-            state.categoryProducts = action.payload.data;
+            state.selectedCategory = action.payload.data;
         },
         [getCategoryProducts.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error.message;
-            state.categoryProducts = null;
+            state.selectedCategory = null;
         },
 
         [getProductDetails.pending]: (state) => {
@@ -106,3 +118,4 @@ const productsSlice = createSlice({
 
 
 export default productsSlice.reducer;
+export const { clearSelectedCategory, clearSelectedProduct } = productsSlice.actions;

@@ -5,7 +5,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import AuthPage from "./pages/AuthPage";
-import HomePage from "./pages/HomePage/HomePage";
+import HomePage from "./pages/HomePage";
+import CategoryProductsPage from "./pages/CategoryProductsPage";
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <HomePage />
+        </Route>
+
+        <Route path="/category/:categoryID">
+          <CategoryProductsPage />
         </Route>
 
         <ProtectedRoute inAuth path="/register">
