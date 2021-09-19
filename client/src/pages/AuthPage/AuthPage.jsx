@@ -81,7 +81,7 @@ function AuthPage({ formType }) {
                     {(!loading && formSubmitted && !error) && <Styles.Message success>{success}</Styles.Message>}
                     {(!loading && formSubmitted && error) && <Styles.Message error>{error}</Styles.Message>}
 
-                    {loading && <Loading small/>}
+                    {loading && <Loading med />}
                     {!loading && <Button small type="submit">{loginSelected ? 'LOGIN' : 'Register'}</Button>}
                 </Styles.Form>
             </Styles.MainCard>
