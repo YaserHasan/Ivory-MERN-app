@@ -12,6 +12,9 @@ function useIsOnDevice(deviceSize) {
         if (currentSizeIndex === 0) {
             return getWindowSize() <= deviceSize;
         }
+        if (currentSizeIndex === deviceSizesList.length - 1) {
+            return getWindowSize() >= deviceSize;
+        }
         const outOfPreviousSizeRange = getWindowSize() > deviceSizesList[currentSizeIndex - 1];
         const inCurrentSizeRange = getWindowSize() <= deviceSize;
         return (outOfPreviousSizeRange && inCurrentSizeRange);
