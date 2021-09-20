@@ -8,11 +8,11 @@ import CartActions from './components/CartActions';
 
 
 function HorizontalProductView(props) {
-    const { imageURL, name, price } = props.product;
+    const { imageURL, name, price, id } = props.product;
     const { inCart } = props;
 
     return (
-        <CustomLink disabled={inCart} to="/">
+        <CustomLink disabled={inCart} to={`/product/${id}`}>
             <Styles.Root hoverEffect={!inCart}>
                     <Styles.ImageSection>
                         {inCart ? <Link to="/"><img src={imageURL} alt="Product" /></Link>

@@ -1,12 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from "./ProtectedRoute";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 import AuthPage from "./pages/AuthPage";
 import HomePage from "./pages/HomePage";
 import CategoryProductsPage from "./pages/CategoryProductsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 
 
 function App() {
@@ -20,6 +21,10 @@ function App() {
 
         <Route path="/category/:categoryID">
           <CategoryProductsPage />
+        </Route>
+
+        <Route path="/product/:productID">
+          <ProductDetailsPage />
         </Route>
 
         <ProtectedRoute inAuth path="/register">
