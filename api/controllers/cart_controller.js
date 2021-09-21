@@ -1,7 +1,18 @@
 const validationUtils = require('../utils/validation_utils');
 
 const Cart = require('../models/cart_model');
+const Product = require('../models/product_model');
 const formatUtils = require('../utils/format_utils');
+
+
+async function getCartProductByID(productID, productQuantity) {
+    const product = await Product.findById(productID).populate('categoryID').exec();
+    return {
+        ...formatUtils.formatProduct(product),
+        quantity: productQuantity,
+        productTotalPrice: product.price * productQuantity,
+    };
+}
 
 exports.addProductToCart = async (req, res) => {
     try {
@@ -20,7 +31,7 @@ exports.addProductToCart = async (req, res) => {
             productID: productID
         });
         await cartItem.save();
-        res.status(201).json({message: 'Successfully added product to cart'});
+        res.status(201).json((await getCartProductByID(productID, 1)));
     } catch(e) {
         console.log(e);
         res.status(500).json({message: "internal server error"});
@@ -41,7 +52,7 @@ exports.incrementProductQuantity = async (req, res) => {
             return res.status(404).json({message: 'no product with this ID could be found on cart'});
         
         await product.updateOne({$inc : {quantity : 1}}).exec();
-        res.status(200).json({message: 'Product quantity updated successfully'});
+        res.status(200).json((await getCartProductByID(product.productID, product.quantity + 1)));
 
     } catch(e) {
         console.log(e);
@@ -66,7 +77,7 @@ exports.decrementProductQuantity = async (req, res) => {
             return res.status(405).json({message: 'product quantity can\'t be less than 1'});
 
         await product.updateOne({$inc : {quantity : -1}}).exec();
-        res.status(200).json({message: 'Product quantity updated successfully'});
+        res.status(200).json((await getCartProductByID(product.productID, product.quantity - 1)));
 
     } catch(e) {
         console.log(e);
@@ -88,7 +99,7 @@ exports.deleteProductFromCart = async (req, res) => {
             return res.status(404).json({message: 'No product with this ID could be found on cart'});
         
         await product.delete();
-        res.status(200).json({message: 'Product deleted successfully'});
+        res.status(200).json((await getCartProductByID(product.productID, product.quantity)));
 
     } catch(e) {
         console.log(e);
