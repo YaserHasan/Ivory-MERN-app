@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { BREAKPOINTS } from '../../../../constants/responsive_breakPoints';
+import Loading from '../../../../components/Loading';
 
 
 export const Root = styled.section`
@@ -50,25 +51,34 @@ export const ImageContainer = styled.div`
     }
 `;
 
+export const Description = styled.p`
+    margin: 3rem 0;
+    color: var(--subtitle-color);
+
+    // responsive
+    @media ${BREAKPOINTS.smallScreensAndLaptops} {
+        & {
+            margin: 2rem 0;
+        }
+    }
+`;
+
 export const TextInfo = styled.div`
     flex: 6;
 
-    & p {
-        margin: 3rem 0;
-        color: var(--subtitle-color);
-    }
-
-    & button {
+    & button,
+    & ${Loading} {
         margin-top: 5rem;
     }
 
     // responsive
     @media ${BREAKPOINTS.smallScreensAndLaptops} {
-        & p {
+        & ${Description} {
             margin: 2rem 0;
         }
 
-        & button {
+        & button,
+        & ${Loading} {
             margin-top: 3rem;
         }
     }
@@ -80,7 +90,8 @@ export const TextInfo = styled.div`
     }
 
     @media ${BREAKPOINTS.mobileDevices} {
-        & button {
+        & button,
+        & ${Loading} {
             margin-top: 2rem;
         }
     }

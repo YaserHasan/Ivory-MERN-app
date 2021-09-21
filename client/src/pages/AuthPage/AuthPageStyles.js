@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Card from '../../components/Card';
 import Container from '../../components/Container';
-import OrgMessage from './components/Message';
+import OrgMessage from '../../components/ErrorMessage';
 
 
 export const Root = styled(Container)`
@@ -34,5 +34,6 @@ export const Title = styled.h1`
 `;
 
 export const Message = styled(OrgMessage)`
+    margin: 0;
     margin-bottom: 1rem;
 `;

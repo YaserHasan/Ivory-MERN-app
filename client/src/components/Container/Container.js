@@ -4,7 +4,10 @@ import styled from "styled-components";
 const Container = styled.div`
     margin: 0 auto;
     max-width: 1100px;
-    ${props => props.expand && 'flex-grow: 1'};
+    ${props => props.expand && `
+        flex-grow: 1;
+        width: 100%;
+    `}
     ${props => (props.centerHorizontally || props.centerVertically) && `
         display: flex;
         justify-content: ${props.centerVertically ? 'center' : 'flex-start'};
@@ -14,6 +17,7 @@ const Container = styled.div`
     @media (max-width: 1140px) {
         & {
             margin: 0 2rem;
+            width: auto;
         }
     }
 `;

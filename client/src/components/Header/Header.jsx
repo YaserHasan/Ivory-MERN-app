@@ -53,7 +53,7 @@ function Header() {
 
         if (user) {
             if (forMobile)
-                links.push(<li key='My Cart'><Link to='/'>My Cart</Link></li>);
+                links.push(<li key='My Cart'><Link to='/cart'>My Cart</Link></li>);
 
             links = links.concat([
                 <li key='My Orders'><Link to='/'>My Orders</Link></li>,
@@ -90,7 +90,7 @@ function Header() {
                 <SearchInput />
 
                 <Styles.Nav>
-                    <Styles.NavLink className="clickable" to="/protect"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
+                    <Styles.NavLink className="clickable" to="/cart"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
                     {logoutLoading && <Loading small />}
                     {!logoutLoading && <Styles.DropDownLink>
                         <Styles.NavLink className="clickable" onClick={preventNavigation}><i className="fas fa-user"></i></Styles.NavLink>

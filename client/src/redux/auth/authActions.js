@@ -24,5 +24,8 @@ export const getUserData = createAsyncThunk(
 
 export const logout = createAsyncThunk(
     'auth/logout',
-    AuthService.logout,
+    async (_, {dispatch}) => {
+        await dispatch(getUserData());
+        return await AuthService.logout();
+    },
 ); 

@@ -10,15 +10,21 @@ import {
 
 const initialState = {
     loading: false,
-    actionLoading: false,
     error: null,
-    actionError: false,
+    actionLoading: null,
+    actionError: null,
     userCart: null,
 };
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: initialState,
+    reducers: {
+        clearActionState: (state) => {
+            state.actionError = null;
+            state.actionLoading = null;
+        }
+    },
     extraReducers: {
         [getUserCart.pending]: (state) => {
             state.loading = true;
@@ -36,12 +42,12 @@ const cartSlice = createSlice({
             state.userCart = null;
         },
 
-        [addProductToCart.pending]: (state) => {
-            state.actionLoading = true;
+        [addProductToCart.pending]: (state, action) => {
+            state.actionLoading = action.meta.arg;
             state.actionError = null;
         },
         [addProductToCart.fulfilled]: (state, action) => {
-            state.actionLoading = false;
+            state.actionLoading = null;
             state.actionError = null;
             if (state.userCart)
                 state.userCart.push(action.payload);
@@ -49,54 +55,55 @@ const cartSlice = createSlice({
                 state.userCart = [ action.payload ];
         },
         [addProductToCart.rejected]: (state, action) => {
-            state.actionLoading = false;
-            state.actionError = action.error.message;
+            state.actionLoading = null;
+            state.actionError = { id: action.meta.arg, message: action.error.message };
         },
 
-        [incrementProductQuantity.pending]: (state) => {
-            state.actionLoading = true;
+        [incrementProductQuantity.pending]: (state, action) => {
+            state.actionLoading = action.meta.arg;
             state.actionError = null;
         },
         [incrementProductQuantity.fulfilled]: (state, action) => {
-            state.actionLoading = false;
+            state.actionLoading = null;
             state.actionError = null;
             const currentProductIndex = state.userCart.findIndex(product => product.id === action.payload.id);
             state.userCart[currentProductIndex] = action.payload;
         },
         [incrementProductQuantity.rejected]: (state, action) => {
-            state.actionLoading = false;
-            state.actionError = action.error.message;
+            state.actionLoading = null;
+            state.actionError = { id: action.meta.arg, message: action.error.message };
         },
 
-        [decrementProductQuantity.pending]: (state) => {
-            state.actionLoading = true;
+        [decrementProductQuantity.pending]: (state, action) => {
+            state.actionLoading = action.meta.arg;
             state.actionError = null;
         },
         [decrementProductQuantity.fulfilled]: (state, action) => {
-            state.actionLoading = false;
+            state.actionLoading = null;
             state.actionError = null;
             const currentProductIndex = state.userCart.findIndex(product => product.id === action.payload.id);
             state.userCart[currentProductIndex] = action.payload;
         },
         [decrementProductQuantity.rejected]: (state, action) => {
-            state.actionLoading = false;
-            state.actionError = action.error.message;
+            state.actionLoading = null;
+            state.actionError = { id: action.meta.arg, message: action.error.message };
         },
 
-        [deleteProductFromCart.pending]: (state) => {
-            state.actionLoading = true;
+        [deleteProductFromCart.pending]: (state, action) => {
+            state.actionLoading = action.meta.arg;
             state.actionError = null;
         },
         [deleteProductFromCart.fulfilled]: (state, action) => {
-            state.actionLoading = false;
+            state.actionLoading = null;
             state.actionError = null;
             state.userCart = state.userCart.filter(product => product.id !== action.payload.id);
         },
         [deleteProductFromCart.rejected]: (state, action) => {
-            state.actionLoading = false;
-            state.actionError = action.error.message;
+            state.actionLoading = null;
+            state.actionError = { id: action.meta.arg, message: action.error.message };
         },
     }
 });
 
+export const { clearActionState } = cartSlice.actions;
 export default cartSlice.reducer;

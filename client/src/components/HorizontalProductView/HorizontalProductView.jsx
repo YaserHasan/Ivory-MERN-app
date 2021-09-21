@@ -15,17 +15,17 @@ function HorizontalProductView(props) {
         <CustomLink disabled={inCart} to={`/product/${id}`}>
             <Styles.Root hoverEffect={!inCart}>
                     <Styles.ImageSection>
-                        {inCart ? <Link to="/"><img src={imageURL} alt="Product" /></Link>
+                        {inCart ? <Link to={`/product/${id}`} target="_blank"><img src={imageURL} alt="Product" /></Link>
                         : <img src={imageURL} alt="Product" />}
                     </Styles.ImageSection>
 
                     <Styles.InfoSection>
                         <Styles.Title>
-                            {inCart ? <Link to="/">{name}</Link> : name}
+                            {inCart ? <Link to={`/product/${id}`} target="_blank">{name}</Link> : name}
                         </Styles.Title>
                         <Styles.Price dangerouslySetInnerHTML={{__html: formatPrice(price)}}></Styles.Price>
 
-                        {inCart && <CartActions />}
+                        {inCart && <CartActions product={props.product} />}
                     </Styles.InfoSection>
             </Styles.Root>
         </CustomLink>
