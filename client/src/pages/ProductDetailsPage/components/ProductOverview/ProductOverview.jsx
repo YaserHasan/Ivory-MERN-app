@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { addProductToCart, deleteProductFromCart } from '../../../../redux/cart/cartActions';
 import { clearActionState } from '../../../../redux/cart/cartSlice';
@@ -13,7 +14,9 @@ import ErrorMessage from '../../../../components/ErrorMessage';
 function ProductOverview() {
     const product = useSelector(state => state.products.selectedProduct);
     const cartState = useSelector(state => state.cart);
+    const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const isProductInCart = cartState.userCart?.find(prod => prod.id === product.id);
     
@@ -22,6 +25,9 @@ function ProductOverview() {
     }, []);
 
     function toggleProductCart() {
+        if (!user)
+            return history.push('/login');
+            
         if (isProductInCart)
             dispatch(deleteProductFromCart(product.id));
         else
