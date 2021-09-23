@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { BREAKPOINTS } from '../../../../constants/responsive_breakPoints';
 import Card from "../../../../components/Card";
 import Divider from "../../../../components/Divider";
+import Loading from '../../../../components/Loading';
 
 
 export const Root = styled.section`
@@ -29,7 +30,8 @@ export const OrderInfoCard = styled(Card)`
         margin: 3rem 0 1.5rem 0;
     }
 
-    & button {
+    & button,
+    & ${Loading} {
         margin-top: 2rem;
     }
 

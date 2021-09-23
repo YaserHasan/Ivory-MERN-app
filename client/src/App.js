@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 import CategoryProductsPage from "./pages/CategoryProductsPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
+import OrdersPage from "./pages/OrdersPage";
 
 
 function App() {
@@ -48,6 +49,10 @@ function App() {
 
         <ProtectedRoute path="/cart">
           <CartPage />
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/orders">
+          <OrdersPage />
         </ProtectedRoute>
       </Switch>
       <Footer />

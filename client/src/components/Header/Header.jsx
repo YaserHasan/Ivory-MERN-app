@@ -56,7 +56,7 @@ function Header() {
                 links.push(<li key='My Cart'><Link to='/cart'>My Cart</Link></li>);
 
             links = links.concat([
-                <li key='My Orders'><Link to='/'>My Orders</Link></li>,
+                <li key='My Orders'><Link to='/orders'>My Orders</Link></li>,
                 <li key='Logout'><Link to='/' onClick={() => dispatch(logout())}>Logout</Link></li>,
             ]);
         }

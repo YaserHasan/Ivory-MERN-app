@@ -1,20 +1,29 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { createOrderFromCart } from '../../../../redux/orders/ordersActions';
 import { formatPrice } from '../../../../utils/formatUtils';
 import * as Styles from './OrderInfoStyles';
 import Divider from "../../../../components/Divider";
+import ErrorMessage from "../../../../components/ErrorMessage";
 import Button from "../../../../components/Button";
+import Loading from '../../../../components/Loading';
 
 
 function OrderInfo() {
     const { userCart } = useSelector(state => state.cart);
+    const { actionLoading: loading, actionError: error } = useSelector(state => state.orders);
+    const dispatch = useDispatch();
 
     const totalPrice = userCart.reduce((currentTotal, product) => {
         return currentTotal + product.productTotalPrice;
     }, 0);
     const subTotalPrice = totalPrice * 0.83;
     const taxesPrice = totalPrice * 0.17;
+
+    async function checkout() {
+        dispatch(createOrderFromCart());
+    }
 
     return (
         <Styles.Root>
@@ -38,7 +47,10 @@ function OrderInfo() {
                     <p className="p-large" dangerouslySetInnerHTML={{__html: formatPrice(totalPrice)}}></p>
                 </Styles.OrderInfoRow>
 
-                <Button small>CHECKOUT</Button>
+                
+                {loading && <Loading med />}
+                {!loading && <Button small disabled={loading} onClick={checkout}>CHECKOUT</Button>}
+                {(error && !loading) && <ErrorMessage>{error}</ErrorMessage>}
             </Styles.OrderInfoCard>
         </Styles.Root>
     );

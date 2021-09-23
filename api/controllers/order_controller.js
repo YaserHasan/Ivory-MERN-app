@@ -13,7 +13,7 @@ exports.createOrder = async (req, res) => {
         const userCart = await Cart.find({userID: userID}).populate('productID').exec();
         // check if user cart is empty
         if (userCart.length == 0)
-            return res.status(404).json({mesage: 'no Products could be found on user cart'});
+            return res.status(404).json({message: 'no Products could be found on user cart'});
         // create order
         let orderTotalPrice = 0;
         const orderProducts = userCart.map((cartProduct) => {
@@ -34,7 +34,7 @@ exports.createOrder = async (req, res) => {
         await order.save();
         // clear user cart
         await Cart.deleteMany({userID: userID});
-        res.status(201).json({mesage: 'Order created successfully'});
+        res.status(201).json({message: 'Order created successfully'});
     } catch(e) {
         console.log(e);
         res.status(500).json({message: "internal server error"});

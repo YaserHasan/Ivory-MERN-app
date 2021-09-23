@@ -8,16 +8,21 @@ import HorizontalProductView from '../../components/HorizontalProductView';
 import OrderInfo from './components/OrderInfo';
 import Loading from '../../components/Loading';
 import ErrorView from '../../components/ErrorView';
+import OrderSuccessPage from '../OrderSuccessPage';
 
 
 function CartPage() {
     const { loading, error, userCart } = useSelector(state => state.cart);
+    const { success: checkoutSuccess } = useSelector(state => state.orders);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(clearActionState());
         dispatch(getUserCart());
     }, []);
+
+    if (checkoutSuccess)
+        return <OrderSuccessPage />
 
     return (
         <Styles.Root expand centerVertically={(loading || error)} centerHorizontally={(loading || error)}>

@@ -7,3 +7,9 @@ export function formatPrice(price) {
     //                                              ILS symbol
     return sanitizeHTML(formattedPrice.toString() + '&#8362;');
 }
+
+ export function formatDate(dateString) {
+    const date = new Date(dateString);
+    const formattedDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    return sanitizeHTML(formattedDate);
+}
