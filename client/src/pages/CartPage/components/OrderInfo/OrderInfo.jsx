@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {  useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { createOrderFromCart } from '../../../../redux/orders/ordersActions';
+import { clearErrorState } from '../../../../redux/orders/ordersSlice';
 import { formatPrice } from '../../../../utils/formatUtils';
 import * as Styles from './OrderInfoStyles';
 import Divider from "../../../../components/Divider";
@@ -20,6 +21,10 @@ function OrderInfo() {
     }, 0);
     const subTotalPrice = totalPrice * 0.83;
     const taxesPrice = totalPrice * 0.17;
+
+    useEffect(() => {
+        return () => dispatch(clearErrorState());
+    }, []);
 
     async function checkout() {
         dispatch(createOrderFromCart());

@@ -17,6 +17,9 @@ const ordersSlice = createSlice({
     initialState: initialState,
     reducers: {
         clearState: (state) => initialState,
+        clearErrorState: (state) => {
+            state.actionError = null;
+        },
     },
     extraReducers: {
         [createOrderFromCart.pending]: (state) => {
@@ -54,4 +57,4 @@ const ordersSlice = createSlice({
 });
 
 export default ordersSlice.reducer;
-export const { clearState } = ordersSlice.actions;
+export const { clearState, clearErrorState } = ordersSlice.actions;
