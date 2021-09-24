@@ -7,6 +7,7 @@ import ordersReducer from './orders/ordersSlice';
 
 
 const store = configureStore({
+    devTools: process.env.NODE_ENV !== 'production',
     reducer: {
         auth: authReducer,
         products: productsReducer,
