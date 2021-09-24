@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import { useDispatch } from 'react-redux';
 import { getUserData } from './redux/auth/authActions';
-import { getUserCart } from './redux/cart/cartActions';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from "./ProtectedRoute";
 import Header from "./components/Header/Header";
@@ -20,7 +19,6 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserData());
-    dispatch(getUserCart());
   }, []);
 
   return (

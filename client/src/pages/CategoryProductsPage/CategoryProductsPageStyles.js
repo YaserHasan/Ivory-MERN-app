@@ -8,3 +8,6 @@ export const Root = styled(Container)`
         margin-bottom: 2rem;
     }
 `;
+Root.defaultProps = {
+    as: 'main',
+};

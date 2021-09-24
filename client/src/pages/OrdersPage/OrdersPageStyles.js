@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Container from '../../components/Container';
+import VerticalFlexList from '../../components/VerticalFlexList';
 
 
 export const Root = styled(Container)`
@@ -8,12 +9,14 @@ export const Root = styled(Container)`
         margin-bottom: 2rem;
     }
 `;
+Root.defaultProps = {
+    as: 'main',
+};
 
-export const OrdersSection = styled.section`
+export const OrdersSection = styled(VerticalFlexList)`
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    row-gap: 3rem;
 `;
+OrdersSection.defaultProps = {
+    as: 'section',
+    gap: '3rem'
+}

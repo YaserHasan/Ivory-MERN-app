@@ -17,6 +17,9 @@ export const Root = styled(Container)`
         max-width: 330px !important;
     }
 `;
+Root.defaultProps = {
+    as: 'main',
+};
 
 export const SuccessIcon = styled.img`
     max-width: 150px;

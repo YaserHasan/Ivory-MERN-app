@@ -3,6 +3,7 @@ import React from 'react';
 import { formatDate, formatPrice } from '../../../../utils/formatUtils';
 import * as Styles from './OrderViewStyles';
 import HorizontalProductView from '../../../../components/HorizontalProductView';
+import VerticalFlexList from '../../../../components/VerticalFlexList';
 
 function OrderView(props) {
     const { order } = props;
@@ -28,11 +29,11 @@ function OrderView(props) {
                 </Styles.AlignLeft>
             </Styles.OrderInfo>
 
-            <Styles.ProductsSection>
+            <VerticalFlexList>
                 {order.products.map(product => (
                     <HorizontalProductView key={product.id} inOrders product={product} />
                 ))}
-            </Styles.ProductsSection>
+            </VerticalFlexList>
         </Styles.Root>
     );
 }

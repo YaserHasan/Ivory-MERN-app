@@ -90,10 +90,10 @@ function Header() {
                 <SearchInput />
 
                 <Styles.Nav>
-                    <Styles.NavLink className="clickable" to="/cart"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
+                    <Styles.NavLink to="/cart" className="clickable"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
                     {logoutLoading && <Loading small />}
                     {!logoutLoading && <Styles.DropDownLink>
-                        <Styles.NavLink className="clickable" onClick={preventNavigation}><i className="fas fa-user"></i></Styles.NavLink>
+                        <Styles.NavLink to="" className="clickable" onClick={preventNavigation}><i className="fas fa-user"></i></Styles.NavLink>
                         <Styles.DropDownItems>
                             {buildAccountLinks()}
                         </Styles.DropDownItems>
@@ -102,7 +102,7 @@ function Header() {
 
                 
                 {/* Added '$' prefix on the prop name to avoid React Unknown Prop Warning */}
-                <Styles.NavLink $menuBtn className="clickable" to="" onClick={toggleMobileMenu}>
+                <Styles.NavLink to="" $menuBtn className="clickable" onClick={toggleMobileMenu}>
                     {logoutLoading && <Loading small />}
                     {!logoutLoading && <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>}
                 </Styles.NavLink>

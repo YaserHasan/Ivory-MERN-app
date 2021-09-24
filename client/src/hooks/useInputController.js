@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function useInputController(validator) {
+function useInputController() {
     const [value, setValue] = useState('');
 
     const onChange = (e) => {

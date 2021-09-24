@@ -11,6 +11,9 @@ export const Root = styled(Container)`
     align-items: flex-start;
     min-height: var(--free-space-size);
 `;
+Root.defaultProps = {
+    as: 'main',
+};
 
 export const MainCard = styled(Card)`
     width: 500px;

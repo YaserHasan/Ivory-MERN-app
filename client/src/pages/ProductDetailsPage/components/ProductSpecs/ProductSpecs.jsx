@@ -11,10 +11,12 @@ function ProductSpecs() {
         <Styles.Root>
             <Styles.Table>
                 {specs.map(spec => (
-                    <tr>
-                        <td><h4>{spec.name}</h4></td>
-                        <td><p>{spec.value}</p></td>
-                    </tr>
+                    <tbody key={spec.name}>
+                        <tr>
+                            <td><h4>{spec.name}</h4></td>
+                            <td><p>{spec.value}</p></td>
+                        </tr>
+                    </tbody>
                 ))}
             </Styles.Table>
         </Styles.Root>

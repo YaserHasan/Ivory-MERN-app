@@ -23,7 +23,7 @@ function ProductDetailsPage() {
     }, [])
 
     return (
-        <Container expand centerVertically={(loading || error)} centerHorizontally={(loading || error)}>
+        <Container as='main' expand centerVertically={(loading || error)} centerHorizontally={(loading || error)}>
             {(loading && !error) && <Loading />}
             {(!loading && error) && <ErrorView errorMesasge={error} />}
 

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
+import VerticalFlexList from '../VerticalFlexList';
 
-const HorizontalProductViewList = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    row-gap: 2rem;
+
+// i know it's just returning the VerticalFlexList as is, i created it 
+// to easily change HorizontalProductViewList in case i needed to
+
+const HorizontalProductViewList = styled(VerticalFlexList)`
+
 `;
 
 export default HorizontalProductViewList;

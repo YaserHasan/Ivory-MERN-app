@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { BREAKPOINTS } from '../../constants/responsive_breakPoints';
 import Container from '../../components/Container';
+import VerticalFlexList from '../../components/VerticalFlexList';
 
 
 export const Root = styled(Container)`
@@ -9,6 +10,9 @@ export const Root = styled(Container)`
         margin-bottom: 2rem;
     }
 `;
+Root.defaultProps = {
+    as: 'main',
+};
 
 export const FlexContainer = styled.div`
     width: 100%;
@@ -25,13 +29,8 @@ export const FlexContainer = styled.div`
     }
 `;
 
-export const CartProductsSection = styled.section`
+export const CartProductsSection = styled(VerticalFlexList)`
     flex: 5.3;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    row-gap: 2rem;
 
     // responsive
     @media ${BREAKPOINTS.iPadsAndTablets} {
@@ -40,4 +39,7 @@ export const CartProductsSection = styled.section`
         }
     }
 `;
+CartProductsSection.defaultProps = {
+    as: 'section',
+};
 
