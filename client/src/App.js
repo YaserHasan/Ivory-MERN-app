@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
-import { useDispatch } from 'react-redux';
-import { getUserData } from './redux/auth/authActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserCart } from './redux/cart/cartActions';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProtectedRoute from "./ProtectedRoute";
 import Header from "./components/Header/Header";
@@ -15,11 +15,12 @@ import OrdersPage from "./pages/OrdersPage";
 
 
 function App() {
+  const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUserData());
-  }, []);
+    dispatch(getUserCart());
+  }, [user]);
 
   return (
     <Router>

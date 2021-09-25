@@ -60,7 +60,9 @@ const authSlice = createSlice({
         [getUserData.fulfilled]: (state, action) => {
             sessionStorage.setItem('user', JSON.stringify(action.payload.user));
             state.loading = false;
-            state.user = action.payload.user;
+            // to avoid unnecessary renders and weird bugs
+            if (!state.user)
+                state.user = action.payload.user;
             state.error = null;
             state.success = null;
         },
