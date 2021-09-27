@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { clearState } from '../../redux/orders/ordersSlice';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import * as Styles from './OrderSuccessPageStyles';
 import Button from '../../components/Button';
 
@@ -12,6 +13,8 @@ function OrderSuccessPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        updatePageTitle('Thank you for your order');
+
         return () => dispatch(clearState());
     }, []);
 

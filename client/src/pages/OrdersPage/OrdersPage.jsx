@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserOrders } from '../../redux/orders/ordersActions';
 import { clearState } from '../../redux/orders/ordersSlice';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import * as Styles from './OrdersPageStyles';
 import ErrorView from '../../components/ErrorView';
 import Loading from '../../components/Loading';
@@ -14,6 +15,7 @@ function OrdersPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        updatePageTitle('My Orders');
         dispatch(getUserOrders());
 
         return () => dispatch(clearState());

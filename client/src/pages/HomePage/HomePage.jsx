@@ -2,6 +2,7 @@ import React, {  useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { getCategories, getFeaturedProducts, getMostPopularProducts } from '../../redux/products/productsActions';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
 import ErrorView from '../../components/ErrorView';
@@ -39,6 +40,7 @@ function HomePage() {
     }
 
     useEffect(() => {
+        updatePageTitle('Ivory Computers and Phones');
         fetchData();
     }, []);
 

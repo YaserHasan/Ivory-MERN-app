@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUserCart } from '../../redux/cart/cartActions';
 import { clearActionState } from '../../redux/cart/cartSlice';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import * as Styles from './CartPageStyles';
 import HorizontalProductView from '../../components/HorizontalProductView';
 import OrderInfo from './components/OrderInfo';
@@ -17,6 +18,7 @@ function CartPage() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        updatePageTitle('Shopping Cart');
         dispatch(clearActionState());
         dispatch(getUserCart());
     }, []);

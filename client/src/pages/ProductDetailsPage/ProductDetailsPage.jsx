@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductDetails } from '../../redux/products/productsActions';
 import { clearSelectedProduct } from '../../redux/products/productsSlice';
+import { updateLinkPreviewTags } from '../../utils/metaTagsUtils';
 import Container from '../../components/Container';
 import Loading from '../../components/Loading';
 import ErrorView from '../../components/ErrorView';
@@ -20,7 +21,17 @@ function ProductDetailsPage() {
         dispatch(getProductDetails(productID));
 
         return () => dispatch(clearSelectedProduct());
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if (selectedProduct)
+            updateLinkPreviewTags({
+                title: selectedProduct.name,
+                description: selectedProduct.description,
+                imageURL: selectedProduct.imageURL,
+                URLPath: `/product/${productID}`,
+            });
+    }, [selectedProduct]);
 
     return (
         <Container as='main' expand centerVertically={(loading || error)} centerHorizontally={(loading || error)}>

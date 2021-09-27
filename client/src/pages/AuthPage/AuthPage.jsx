@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { login, register } from '../../redux/auth/authActions';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import * as Styles from './AuthPageStyles';
 import AuthNav from './components/AuthNav';
 import Input from '../../components/Input';
@@ -28,6 +29,7 @@ function AuthPage({ formType }) {
 
     useEffect(() => {
         setFormSubmitted(false);
+        updatePageTitle(loginSelected ? 'Login' : 'Register');
     }, [loginSelected]);
 
 

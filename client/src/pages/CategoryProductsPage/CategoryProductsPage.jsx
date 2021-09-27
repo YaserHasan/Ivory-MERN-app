@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getCategoryProducts } from '../../redux/products/productsActions';
 import { clearSelectedCategory } from '../../redux/products/productsSlice';
 import * as Styles from './CategoryProductsPageStyles';
+import { updatePageTitle } from '../../utils/metaTagsUtils';
 import ProductsListView from '../../components/ProductsListView';
 import Loading from '../../components/Loading';
 import ErrorView from '../../components/ErrorView';
@@ -20,6 +21,11 @@ function CategoryProductsPage() {
 
         return () => dispatch(clearSelectedCategory());
     }, []);
+
+    useEffect(() => {
+        if (selectedCategory)
+            updatePageTitle(selectedCategory.categoryName);
+    }, [selectedCategory]);
 
     return (
         <Styles.Root expand centerVertically={(loading || error)} centerHorizontally={(loading || error)}>
