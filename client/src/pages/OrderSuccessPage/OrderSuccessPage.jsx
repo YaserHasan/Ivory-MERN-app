@@ -6,6 +6,7 @@ import { clearState } from '../../redux/orders/ordersSlice';
 import { updatePageTitle } from '../../utils/metaTagsUtils';
 import * as Styles from './OrderSuccessPageStyles';
 import Button from '../../components/Button';
+import SuccessIcon from '../../assets/images/checked.png';
 
 
 function OrderSuccessPage() {
@@ -20,7 +21,7 @@ function OrderSuccessPage() {
 
     return (
         <Styles.Root expand centerHorizontally centerVertically>
-            <Styles.SuccessIcon src="../assets/images/checked.png" alt="success" />
+            <Styles.SuccessIcon src={SuccessIcon} alt="success" />
             <h1>Thank you for your order</h1>
             <p class="p-large">
                 We are currently processing your order.<br/>Your order will arrive within 15 days
