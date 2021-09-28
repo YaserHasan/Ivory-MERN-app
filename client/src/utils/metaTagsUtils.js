@@ -1,11 +1,11 @@
 const BASE_URL = 'https://ivory-computers.herokuapp.com';
 
 function selectMetaByName(metaName) {
-    return document.querySelector(`head meta[name=\"${metaName}\"]`);
+    return document.querySelector(`head meta[name="${metaName}"]`);
 }
 
 function selectMetaByProperty(property) {
-    return document.querySelector(`head meta[property=\"${property}\"]`);
+    return document.querySelector(`head meta[property="${property}"]`);
 }
 
 function updateFacebookTags(data) {

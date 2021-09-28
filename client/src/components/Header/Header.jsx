@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../redux/auth/authActions';
 import * as Styles from './HeaderStyles';
@@ -8,77 +8,41 @@ import Logo from '../../assets/images/logo.png';
 import Divider from '../Divider';
 import SearchInput from './components/SearchInput';
 import Loading from '../Loading';
+import UserAvatar from './components/UserAvatar';
+import MobileNav from './components/MobileNav';
 
 
 function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [accountMenuOpen, setAccountMenuOpen] = useState(false);
     const { user, logoutLoading } = useSelector(state => state.auth);
-    const mobileMenuRef = useRef();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     function toggleMobileMenu(e) {
         e.preventDefault();
         setMobileMenuOpen(prev => !prev);
     }
 
-    // to close mobile menu on link click
-    // this will run every time the auth changes
-    // to add the event to the new links that gets added
-    useEffect(() => {
-        const links = mobileMenuRef.current.querySelectorAll('a');
-        links.forEach(link =>
-            link.addEventListener('click', e => {
-                setMobileMenuOpen(false);
-            })    
-        );
-    }, [user]);
-
-    function buildInfoLinks(forMobile) {
-        const links = [
-            { name: 'about Ivory', path: '/' },
-            { name: 'contact us', path: '/' },
-        ];
-        if (forMobile) 
-            return links.map(link => (
-                <li key={link.name}><Link to={link.path}>{link.name}</Link></li>
-            ));
-        
-        return links.map(link => (
-            <li key={link.name}><Link to={link.path}><h5>{link.name}</h5></Link></li>
-        ));
-    }
-
-    function buildAccountLinks(forMobile) {
-        let links = [];
-
-        if (user) {
-            if (forMobile)
-                links.push(<li key='My Cart'><Link to='/cart'>My Cart</Link></li>);
-
-            links = links.concat([
-                <li key='My Orders'><Link to='/orders'>My Orders</Link></li>,
-                <li key='Logout'><Link to='/' onClick={() => dispatch(logout())}>Logout</Link></li>,
-            ]);
-        }
-
-        else {
-            links = [
-                <li key='Login'><Link to='/login'>Login</Link></li>,
-                <li key='Register'><Link to='/register'>Register</Link></li>,
-            ]
-        }
-        return links;
-    }
-
-    function preventNavigation(e) {
+    function toggleAccountMenu(e) {
         e.preventDefault();
+        setAccountMenuOpen(prev => !prev);
     }
+
+    // to close mobile menu and account menu on link click
+    useEffect(() => {
+        history.listen(location => {
+            setMobileMenuOpen(false);
+            setAccountMenuOpen(false);
+        });
+    }, []);
 
     return (
         <Styles.Root>
             <Styles.TopHead>
                 <ul>
-                    {buildInfoLinks()}
+                    <li><Link to="/"><h5>about Ivory</h5></Link></li>
+                    <li><Link to="/"><h5>contact us</h5></Link></li>
                 </ul>
             </Styles.TopHead>
 
@@ -86,36 +50,36 @@ function Header() {
 
             <Styles.MainHead>
                 <Link to="/"><img src={Logo} alt="logo"/></Link>
-
                 <SearchInput />
-
                 <Styles.Nav>
                     <Styles.NavLink to="/cart" className="clickable"><i className="fas fa-shopping-cart"></i></Styles.NavLink>
                     {logoutLoading && <Loading small />}
                     {!logoutLoading && <Styles.DropDownLink>
-                        <Styles.NavLink to="" className="clickable" onClick={preventNavigation}><i className="fas fa-user"></i></Styles.NavLink>
-                        <Styles.DropDownItems>
-                            {buildAccountLinks()}
+                        <Styles.NavLink id="accountBtn" to="" className="clickable" onClick={toggleAccountMenu}><i className="fas fa-user"></i></Styles.NavLink>
+                        <Styles.DropDownItems active={accountMenuOpen}>
+                            {user ?
+                            <>
+                                <UserAvatar />
+                                <Styles.DropDownItem><Link to='/orders'>My Orders</Link></Styles.DropDownItem>
+                                <Styles.DropDownItem><Link to='/' onClick={() => dispatch(logout())}>Logout</Link></Styles.DropDownItem>
+                            </> :
+                            <>
+                                <Styles.DropDownItem><Link to='/login'>Login</Link></Styles.DropDownItem>
+                                <Styles.DropDownItem><Link to='/register'>Register</Link></Styles.DropDownItem>
+                            </>}
                         </Styles.DropDownItems>
                     </Styles.DropDownLink>}
                 </Styles.Nav>
-
-                
                 {/* Added '$' prefix on the prop name to avoid React Unknown Prop Warning */}
-                <Styles.NavLink to="" $menuBtn className="clickable" onClick={toggleMobileMenu}>
+                <Styles.NavLink id="menuBtn" to="" $menuBtn className="clickable" onClick={toggleMobileMenu}>
                     {logoutLoading && <Loading small />}
-                    {!logoutLoading && <i className={mobileMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>}
+                    {!logoutLoading && <i className="fas fa-bars"></i>}
                 </Styles.NavLink>
             </Styles.MainHead>
-
+            
             <Divider />
-
-            <Styles.MobileNav active={mobileMenuOpen} ref={mobileMenuRef}>
-                <Styles.MobileSearchWrapper>
-                    <SearchInput mobile />
-                </Styles.MobileSearchWrapper>
-                {buildAccountLinks(true).concat(buildInfoLinks(true))}
-            </Styles.MobileNav>
+            
+            <MobileNav active={mobileMenuOpen} closeMenu={toggleMobileMenu} />
         </Styles.Root>
     );
 }

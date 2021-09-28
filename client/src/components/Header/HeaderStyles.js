@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 import { Link } from 'react-router-dom';
+import { BREAKPOINTS, DEVICES } from '../../constants/responsive_breakPoints';
 import Container from '../Container';
 import Divider from '../Divider';
-import { BREAKPOINTS, DEVICES } from '../../constants/responsive_breakPoints';
 
 
 export const Root = styled.header`
@@ -123,116 +123,64 @@ export const NavLink = styled(Link)`
     `}
 `;
 
-export const MobileSearchWrapper = styled.div`
-    max-width: 9999px;
-    margin: 0;
-    padding: 1rem;
-`;
-
-export const DropDownItems = styled.ul`
-    position: absolute;
-    width: 270px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
-    background-color: white;
-    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15);
-    list-style: none;
-    border-radius: 8px;
-    display: none;
-    animation: account-menu-animation 300ms;
-
-    @keyframes account-menu-animation {
-        0% {
-            opacity: 0;
-            transform: translateX(-50%) translateY(-10px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-    }
-
-    &::before {
-        content: '';
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background-color: white;
-        top: -6px;
-        left: 50%;
-        transform: translateX(-50%) rotate(45deg);
-    }
-
-    & li {
-        transition: var(--transition-time);
-
-        &:hover {
-            background-color: rgba(13, 12, 34, 0.03);
-        }
-
-        & > * {
-            display: block;
-            cursor: pointer;
-            padding: 1.5rem;
-            font-size: 2rem;
-            font-weight: 500;
-            transition: var(--transition-time);
-        }
-
-        &:hover > * {
-            color: var(--accent-color);
-        }
-    }
-`;
-
 export const DropDownLink = styled.div`
     height: 100%;
-    position: relative;
 
     & a {
         margin: 0 !important;
     }
+`;
 
-    &:hover > ${DropDownItems} {
-        display: block;
+export const DropDownItems = styled.ul`
+    position: absolute;
+    min-width: 250px;
+    right: -1rem;
+    background-color: white;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    border-radius: 8px;
+    display: ${props => props.active ? 'block' : 'none'};
+    animation: account-menu-animation 300ms;
+    --border: rgba(0,0,0,0.08) solid 1px;
+
+    & > * {
+        border-bottom: var(--border);
+    }
+
+    & > *:last-child {
+        border-bottom: none;
+    }
+
+    @keyframes account-menu-animation {
+        0% {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 `;
 
-export const MobileNav = styled.ul`
-    position: absolute;
-    top: 60px;
-    right: 0;
-    left: 0;
-    z-index: 999;
-    padding: 1rem;
-    background-color: var(--divider-color);
-    text-align: center;
+export const DropDownItem = styled.li`
     transition: var(--transition-time);
-    opacity: 0;
-    transform-origin: top;
-    transform: scaleY(0);
 
-    ${props => props.active && `
-        transform: scaleY(1);
-        opacity: 1;
-    `}
-
-    & a {
+    &:hover {
+        background-color: rgba(13, 12, 34, 0.03);
+    }
+    
+    & > * {
         display: block;
         cursor: pointer;
+        padding: 1.5rem 2rem;
         font-size: 2rem;
         font-weight: 500;
-        padding: 1rem;
         transition: var(--transition-time);
-        &:active,
-        &:hover {      
-            background-color: var(--primary-color);
-            color: white;
-        }
     }
+
+    &:hover > * {
+        color: var(--accent-color);
+    }
+
 `;

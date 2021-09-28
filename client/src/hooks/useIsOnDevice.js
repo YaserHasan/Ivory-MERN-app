@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { DEVICE_SIZES } from '../constants/responsive_breakPoints';
 
@@ -24,9 +24,15 @@ function useIsOnDevice(deviceSize) {
         return document.documentElement.clientWidth;
     }
 
-    window.addEventListener('resize', e => {
-        setIsOn(getIsOn());
-    });
+    useEffect(() => {
+        function listener() {
+            setIsOn(getIsOn());
+        }
+        window.addEventListener('resize', listener);
+
+        return () => window.removeEventListener('resize', listener);
+    }, []);
+    
     return isOn;
 }
 
