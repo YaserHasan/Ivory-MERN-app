@@ -44,7 +44,7 @@ function generateToken(user) {
             name: user.name,
             email: user.email
         },
-        process.env.JWT_SECRET,
+        process.env.IVORY_JWT_SECRET,
         {
             algorithm: "HS256",
             expiresIn: "10m"
@@ -108,7 +108,7 @@ exports.login = async (req, res) => {
             const formattedUserData = {_id: user._id, name: user.name, email: user.email};
             const refreshToken = jwt.sign(
                 formattedUserData,
-                process.env.JWT_REFRESH_SECRET,
+                process.env.IVORY_JWT_REFRESH_SECRET,
             );
             await addRefreshToken(user._id, refreshToken);
             res.cookie('accessToken', accessToken, cookieSettings);
@@ -150,7 +150,7 @@ exports.refreshToken = async (req, res) => {
         
         const storedRefreshToken = await RefreshToken.findOne({refreshToken: refreshToken});
         if (storedRefreshToken != undefined) {
-            jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET, (err, userData) => {
+            jwt.verify(refreshToken, process.env.IVORY_JWT_REFRESH_SECRET, (err, userData) => {
             if (err) 
                 res.status(401).json({message: "invalid refreshToken"});
             else {

@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
         if (!accessToken)
             accessToken = req.cookies.accessToken;
 
-        const decoded = jwt.verify(accessToken, process.env.JWT_SECRET, {"alg": "HS256"});
+        const decoded = jwt.verify(accessToken, process.env.IVORY_JWT_SECRET, {"alg": "HS256"});
         req.userData = decoded;
         next();
     } catch (error) {

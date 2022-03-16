@@ -12,7 +12,7 @@ const orders = require('./api/routes/orders_route');
 
 
 // Connect to Database
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
+mongoose.connect(process.env.IVORY_DATABASE_URL, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
@@ -36,6 +36,6 @@ app.get("*", (req, res) => {
 });
 
 
-const port = process.env.PORT || 5000;
+const port = process.env.IVORY_PORT || 5000;
 console.log(`server up and running on port: ${port}`);
 app.listen(port);
